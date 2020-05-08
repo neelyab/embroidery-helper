@@ -1,0 +1,30 @@
+.img {
+    height: 200px;
+    width: 300px;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  section:nth-child(even) {
+    background: darkgrey;
+  }
+  .about {
+   display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; 
+    min-height: 300px;
+    padding: 30px 30px;
+  }
+.about p {
+    text-align: center;
+  }
+  
+section p {
+    width: 60%;
+  }
+.img p {
+    color: white;
+    text-align: center;
+}

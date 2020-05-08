@@ -1,3 +1,11 @@
 .signup input, label {
     display: block;
 }
+.signup, .login {
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    width: 50%;
+    margin: 0 auto;
+  }

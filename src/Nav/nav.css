@@ -1,5 +1,7 @@
 nav li {
     list-style: none;
+    display: flex;
+    justify-content: center;
 }
 
 nav a {
@@ -7,9 +9,9 @@ nav a {
 }
 
 nav {
+    padding: 10px 0px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     align-items: center;
     margin-bottom: 20px;
