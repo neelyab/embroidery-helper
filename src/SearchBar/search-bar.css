@@ -1,0 +1,9 @@
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.filters label, .filters input {
+    display: inline-block;
+}
