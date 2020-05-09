@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import './stitches-results.css'
 
+
 class StitchesResults extends Component {
     render(){
-        const {stitches} = this.props 
-        console.log(stitches)
+        const {stitches} = this.props
         let stitchResults;
         if (stitches) {
             stitchResults = this.props.stitches.map((stitch, i) => {
@@ -13,7 +13,7 @@ class StitchesResults extends Component {
                     <span className="stitch-name">{stitch.name}</span>
                     <img className="stitch-image" src={stitch.imageUrl} alt={stitch.name}/>
                     <p>{stitch.description}</p>
-                    <button>Save</button>
+                    <button type="button" onClick={() => this.props.saveStitch(stitch.id)}>Save</button>
                 </li>
                 )
             })
