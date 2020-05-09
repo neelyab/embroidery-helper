@@ -19,6 +19,7 @@ class SearchBar extends Component {
                 <input type="checkbox" name="include-projects" value="include-projects" checked={this.props.checked === true} onChange={()=>this.props.handleCheck()}/>
             </div>
             <button type="submit">Submit</button>
+            <button type="button" onClick={() => this.props.clearResults()}>Clear Results</button>
         </form>
         )
     }

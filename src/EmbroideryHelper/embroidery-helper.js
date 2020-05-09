@@ -15,8 +15,16 @@ class EmbroideryHelper extends Component {
             projects: STORE.projects,
             stitchResults: null,
             projectResults: null,
-            error: null
+            error: null,
+            saved: {
+                stitches: [],
+                projects: []
+                }
         }
+    }
+    clearResults = () => {
+        this.setState({stitchResults: null,
+        projectResults: null})
     }
     handleUpdate = search => {
         this.setState({searchTerm: search, 
@@ -32,8 +40,7 @@ class EmbroideryHelper extends Component {
             this.setState({error: 'Please select a search term'})
         } else {
         const searchQuery = searchTerm.split("-")
-        const search = searchQuery.join(' ')
-        console.log(search)
+        const search = searchQuery.join(" ")
         const stitchResults = this.state.stitches.filter(stitch => stitch.name === search)
         this.setState({stitchResults})
         // if include projects are checked, search for projects that include stitches
@@ -54,15 +61,24 @@ class EmbroideryHelper extends Component {
             }
         }
     }
+    saveProject = projectId => {
+        console.log(projectId)
+        const project = this.state.projects.find(p => p.id === projectId)
+        console.log(project)
+        this.setState({saved: {
+            projects: [...this.state.saved.projects, project]
+        }})
+    }
     render(){
         return(<div className='embroidery-helper'>
             <SearchBar 
                 handleUpdate={(e) => this.handleUpdate(e)} 
                 handleCheck={() => this.handleCheck()}
                 handleSubmit={(e) => this.handleSubmit(e)}
+                clearResults={() => this.clearResults()}
                 checked={this.state.checked}/>
             {this.state.error && <p>{this.state.error}</p>}
-            <SearchResults projects={this.state.projectResults} stitches={this.state.stitchResults}/>
+            <SearchResults projects={this.state.projectResults} stitches={this.state.stitchResults} saveProject={(project) => this.saveProject(project)}/>
             <Saved/>
         </div>)
     }

@@ -10,7 +10,7 @@ class SearchResults extends Component {
         return(
         <div className="search-results">
             <div className="stitches-results"><StitchesResults stitches={stitches}/></div>
-            <div className="project-results"><ProjectResults projects={projects}/></div>
+            <div className="project-results"><ProjectResults projects={projects} saveProject= {this.props.saveProject}/></div>
         </div>
         )
     }

@@ -6,7 +6,7 @@ class StitchesResults extends Component {
         const {stitches} = this.props 
         console.log(stitches)
         let stitchResults;
-        if (stitches !== null) {
+        if (stitches) {
             stitchResults = this.props.stitches.map((stitch, i) => {
                 return(
                 <li key ={i}>
@@ -17,7 +17,7 @@ class StitchesResults extends Component {
                 </li>
                 )
             })
-        } else{
+        } else {
             stitchResults = ''
         }
     
