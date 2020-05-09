@@ -8,7 +8,8 @@ class ProjectResults extends Component {
             projectResults = projects.map((project, i)=>{
                 return(
                     <li key={i}>
-                    <span className="project-name">Project: <a href={project.url}target="_blank" rel="noopener noreferrer">{project.name}</a></span>
+                    <p className="project-name">Project: </p>
+                    <a href={project.url}target="_blank" rel="noopener noreferrer">{project.name}</a>
                     <img src={project.imageUrl} alt={project.name}/>
                     <button type="button" onClick={() => this.props.saveProject(project.id)}>Save</button>
                     </li>

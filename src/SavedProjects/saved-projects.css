@@ -7,11 +7,10 @@
     padding: 0;
 }
 
-.saved-project {
-    max-width: 500px;
-    width: 80%;
-    border: 1px solid black;
-}
 .saved-project button {
     margin-top: 5px;
+}
+.saved-project a {
+    margin-bottom: 10px;
+    color: black;
 }

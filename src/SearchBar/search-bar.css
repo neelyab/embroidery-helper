@@ -4,8 +4,19 @@
     width: 50%;
     margin: 0 auto;
 }
-.filters label, .filters input {
+.filters>input {
     display: inline-block;
+    width: 50px;
+}
+.filters label {
+    display: inline;
+}
+.filters {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
 }
 button {
     margin: 5px auto;

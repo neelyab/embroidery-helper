@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './saved-projects.css'
+import StitchesResults from '../StitchesResults/stitches-results';
 
 class SavedProjects extends Component {
     render() {
@@ -10,6 +11,7 @@ class SavedProjects extends Component {
             return(
             <li key={project.id} className="saved-project">
                 <a href={project.url} target="_blank" rel= "noopener noreferrer">{project.name}</a>
+                <img src={project.imageUrl} alt={project.name}/>
                 <button type="button">Delete</button>
             </li>)
         }
@@ -18,7 +20,7 @@ class SavedProjects extends Component {
     }
         return(
         <div>
-            <h2>Saved Projects:</h2>
+            {projects.length > 0 && <h2>Saved Projects:</h2>}
             <ul className="saved-project-list">{projects && savedProjects}</ul>
         </div>
         )
