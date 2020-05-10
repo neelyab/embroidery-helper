@@ -12,7 +12,7 @@ class SavedStitches extends Component {
                 <span className="stitch-name">{stitch.name}</span>
                 <img className = "stitch-image" src={stitch.imageUrl} alt={stitch.name}/>
                 <p>{stitch.description}</p>
-                <button>Delete</button>
+                <button type="button" onClick={()=> this.props.deleteStitch(stitch.id)}>Delete</button>
             </li>
             )
         })

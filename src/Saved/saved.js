@@ -13,7 +13,7 @@ class Saved extends Component {
                 />
                 <SavedStitches 
                 stitches={this.props.stitches}
-                deleteStitch={(project)=>this.props.deleteStitch(project)}
+                deleteStitch={(stitch)=>this.props.deleteStitch(stitch)}
                 />
             </div>
         )

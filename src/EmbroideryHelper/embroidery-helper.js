@@ -105,7 +105,13 @@ class EmbroideryHelper extends Component {
         })
     }
     deleteStitch = stitchId => {
-        console.log('deleting stitch')
+        console.log(stitchId)
+        const {projects} = this.state.saved
+        const stitches = this.state.saved.stitches.filter(stitch=>stitch.id !==stitchId)
+        this.setState({saved:{  
+            projects,
+            stitches
+        }})
     }
     deleteProject = projectId => {
         const {stitches} = this.state.saved
