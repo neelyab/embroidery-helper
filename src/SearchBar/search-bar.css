@@ -6,7 +6,7 @@
 }
 .filters>input {
     display: inline-block;
-    width: 50px;
+    width: 40px;
 }
 .filters label {
     display: inline;
@@ -16,9 +16,11 @@
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
-    width: 50%;
 }
 button {
     margin: 5px auto;
     max-width: 200px;
   }
+.stitch {
+    font-weight: bold;
+}

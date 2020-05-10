@@ -128,6 +128,7 @@ class EmbroideryHelper extends Component {
                 handleCheck={() => this.handleCheck()}
                 handleSubmit={(e) => this.handleSubmit(e)}
                 clearResults={() => this.clearResults()}
+                searchTerm={this.state.searchTerm}
                 checked={this.state.checked}/>
             {this.state.error && <p>{this.state.error}</p>}
             <SearchResults 
