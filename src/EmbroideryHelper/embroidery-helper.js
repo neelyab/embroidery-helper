@@ -104,6 +104,17 @@ class EmbroideryHelper extends Component {
          }
         })
     }
+    deleteStitch = stitchId => {
+        console.log('deleting stitch')
+    }
+    deleteProject = projectId => {
+        const {stitches} = this.state.saved
+        const projects = this.state.saved.projects.filter(project=>project.id !== projectId)
+        this.setState({saved: {
+            projects,
+            stitches
+        }})
+    }
     render(){
         return(<div className='embroidery-helper'>
             <SearchBar 
@@ -113,10 +124,16 @@ class EmbroideryHelper extends Component {
                 clearResults={() => this.clearResults()}
                 checked={this.state.checked}/>
             {this.state.error && <p>{this.state.error}</p>}
-            <SearchResults projects={this.state.projectResults} stitches={this.state.stitchResults} 
+            <SearchResults 
+                projects={this.state.projectResults} 
+                stitches={this.state.stitchResults} 
                 saveProject={(project) => this.saveProject(project)}
                 saveStitch={(stitch) => this.saveStitch(stitch)}/>
-            <Saved projects={this.state.saved.projects} stitches={this.state.saved.stitches}/>
+            <Saved 
+                projects={this.state.saved.projects} 
+                stitches={this.state.saved.stitches}
+                deleteStitch={(stitch)=>this.deleteStitch(stitch)}
+                deleteProject={(project)=>this.deleteProject(project)}/>
         </div>)
     }
 }

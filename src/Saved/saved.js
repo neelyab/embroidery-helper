@@ -7,8 +7,14 @@ class Saved extends Component {
     render(){
         return(
             <div className="saved">
-                <SavedProjects projects={this.props.projects}/>
-                <SavedStitches stitches={this.props.stitches}/>
+                <SavedProjects 
+                    projects={this.props.projects}
+                    deleteProject={(project) => this.props.deleteProject(project)}
+                />
+                <SavedStitches 
+                stitches={this.props.stitches}
+                deleteStitch={(project)=>this.props.deleteStitch(project)}
+                />
             </div>
         )
     }

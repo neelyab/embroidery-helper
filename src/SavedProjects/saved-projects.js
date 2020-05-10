@@ -12,7 +12,7 @@ class SavedProjects extends Component {
             <li key={project.id} className="saved-project">
                 <a href={project.url} target="_blank" rel= "noopener noreferrer">{project.name}</a>
                 <img src={project.imageUrl} alt={project.name}/>
-                <button type="button">Delete</button>
+                <button type="button" onClick={()=>this.props.deleteProject(project.id)}>Delete</button>
             </li>)
         }
     )} else {
