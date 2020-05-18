@@ -34,7 +34,8 @@ class SignUp extends Component {
            })
             .then(res =>
               (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
+                ? res.json().then(e => Promise.reject(e)
+                )
                 : res.json()
                  )
             .then(user => {
@@ -43,6 +44,9 @@ class SignUp extends Component {
                 first_name.value = ''
                 repeat_password.value = ''
                 this.props.history.push('/login')
+            })
+            .catch(res => {
+                this.setState({error: res.error})
             })
 
     }
