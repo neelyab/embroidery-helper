@@ -6,13 +6,13 @@ class SavedStitches extends Component {
         const {stitches} = this.props 
         let savedStitches;
         if(stitches) {
-            savedStitches = stitches.map(stitch=>{
+            savedStitches = stitches.map((stitch)=>{
             return(
             <li key={stitch.id} className="saved-stitch">
-                <span className="stitch-name">{stitch.name}</span>
-                <img className = "stitch-image" src={stitch.imageUrl} alt={stitch.name}/>
-                <p>{stitch.description}</p>
-                <button type="button" onClick={()=> this.props.deleteStitch(stitch.id)}>Delete</button>
+                <span className="stitch-name">{stitch.stitch_name}</span>
+                <img className = "stitch-image" src={stitch.image_url} alt={stitch.stitch_name}/>
+                <p>{stitch.stitch_description}</p>
+                <button type="button" onClick={()=> this.props.deleteStitch(stitch.id || stitch.stitch)}>Delete</button>
             </li>
             )
         })

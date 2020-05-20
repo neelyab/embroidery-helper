@@ -10,8 +10,8 @@ class SavedProjects extends Component {
             savedProjects = projects.map(project => {
             return(
             <li key={project.id} className="saved-project">
-                <a href={project.url} target="_blank" rel= "noopener noreferrer">{project.name}</a>
-                <img src={project.imageUrl} alt={project.name}/>
+                <a href={project.project_url} target="_blank" rel= "noopener noreferrer">{project.project_name}</a>
+                <img src={project.image_url} alt={project.project_name}/>
                 <button type="button" onClick={()=>this.props.deleteProject(project.id)}>Delete</button>
             </li>)
         }

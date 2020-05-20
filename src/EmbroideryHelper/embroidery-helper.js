@@ -26,31 +26,44 @@ class EmbroideryHelper extends Component {
     }
     componentDidMount(){
         const token = TokenService.getAuthToken()
-        fetch(`${config.API_ENDPOINT}/saved_stitches/`, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-                })
-        .then(res => {
-                if(!res.ok){
-                return  res.json().then(e => Promise.reject(e))
-                } else {
-                return res.json()
+   // get saved stitches and projects
+        Promise.all([
+            fetch(`${config.API_ENDPOINT}/saved_stitches/`, {
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            }),
+            fetch(`${config.API_ENDPOINT}/saved_projects/`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             })
-        .then(results => {
-            const projects = this.state.saved.projects
-            this.setState({
-                saved: {
-                    stitches: results,
-                    projects
-                }
-            })
+        ])
+
+        .then(([stitchRes, projectRes]) => {
+                if(!stitchRes.ok){
+                stitchRes.json().then(e => Promise.reject(e))
+                } 
+                if(!projectRes.ok){
+                    projectRes.json().then(e => Promise.reject(e))
+                    } 
+                return Promise.all([stitchRes.json(), projectRes.json()])
+        })
+        .then(([stitches, projects]) => {
+            console.log(stitches, projects)
+           this.setState({
+               saved: {
+                   stitches,
+                   projects
+               }
+           })
         })
         .catch(res => {
-            this.setState({error: res.error})
+            this.setState({error: 'Something went wrong, please try again later.'})
         })
     }
     clearResults = () => {
@@ -73,13 +86,13 @@ class EmbroideryHelper extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const {searchTerm, checked } = this.state
-        const searchQuery = searchTerm.split("-")
-        const search = searchQuery.join(" ")
-        const token = TokenService.getAuthToken()
         // error message if stitch seleciton is left null
         if(!searchTerm) {
             this.setState({error: 'Please select a search term'})
         } else {
+        const searchQuery = searchTerm.split("-")
+        const search = searchQuery.join(" ")
+        const token = TokenService.getAuthToken()
             fetch(`${config.API_ENDPOINT}/stitches/?stitch=${search}`, {
                     method: 'GET',
                     headers: {
@@ -105,7 +118,6 @@ class EmbroideryHelper extends Component {
 
         // if include projects are checked, search for projects that include stitches
             if (checked) {
-                let projectResults = []
                 const searchQuery = searchTerm.split("-")
                 const search = searchQuery[0]
                 
@@ -129,7 +141,7 @@ class EmbroideryHelper extends Component {
                 })
             })
             .catch(res => {
-                this.setState({error: res.error})
+                this.setState({error: 'Something went wrong, please try again later.'})
             })
             } else {
         //if include projects is not checked, reset projectResults
@@ -140,15 +152,37 @@ class EmbroideryHelper extends Component {
         }
     }
     saveProject = projectId => {
+        const token = TokenService.getAuthToken()
         const {stitches, projects} = this.state.saved
-        const project = this.state.projects.find(p => p.id === projectId)
+        const project = this.state.projectResults.find(p => p.id === projectId)
          //check to see if project has already been saved 
         const number = projects.filter(project => project.id === projectId).length
         if (number !== 0){
-            return projects
-            console.log('already saved')
+            this.setState({error: 'Project already saved'})
         } else {
-          
+            fetch(`${config.API_ENDPOINT}/saved_projects/${project.id}`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+                })
+            .then(res => {
+                if(!res.ok){
+                  return  res.json().then(e => Promise.reject(e))
+                } 
+            })
+            .then(response => {
+            this.setState({
+                saved: {
+                    stitches,
+                    projects: [...projects, project]
+                }
+            })
+            })
+            .catch(res => {
+                this.setState({error: 'Something went wrong, please try again later.'})
+            })
         }
         this.setState({saved:{
             stitches,
@@ -157,19 +191,15 @@ class EmbroideryHelper extends Component {
         })
     }
     saveStitch = stitchId => {
-        console.log(stitchId)
         const token = TokenService.getAuthToken()
-        const {stitches, projects} = this.state.saved || []
+        const {projects, stitches } = this.state.saved
         const stitch = this.state.stitchResults.find(s => s.id === stitchId)
-        //check to see if stitch has already been saved 
-        let number;
-        if (stitches.length > 0) {
-        number = stitches.filter(stitch => stitch.id === stitchId).length
-            if (number !== 0){
+         //check to see if stitch has already been saved 
+        const number = stitches.filter(stitch => stitch.id === stitchId).length
+        if (number > 0){
                 this.setState({error: 'Stitch already saved'})
-                return stitches
+                console.log('stitch already saved')
             }
-        }
          else {
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitch.id}`, {
                 method: 'POST',
@@ -192,27 +222,69 @@ class EmbroideryHelper extends Component {
             })
         })
         .catch(res => {
-            this.setState({error: res.error})
+            this.setState({error: 'Something went wrong, please try again later.'})
         })
-
-        }
+    }
     }
     deleteStitch = stitchId => {
         console.log(stitchId)
         const {projects} = this.state.saved
-        const stitches = this.state.saved.stitches.filter(stitch=>stitch.id !==stitchId)
-        this.setState({saved:{  
-            projects,
-            stitches
-        }})
+        const stitches = this.state.saved.stitches.filter(stitch=> stitch.id !== stitchId )
+        const token = TokenService.getAuthToken()
+
+        fetch(`${config.API_ENDPOINT}/saved_stitches/${stitchId}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+            })
+        .then(res => {
+            if(!res.ok){
+              return  res.json().then(e => Promise.reject(e))
+            } 
+        })
+        .then(response => {
+            this.setState({
+                saved: {
+                    stitches: stitches,
+                    projects
+                }
+            })
+        })
+        .catch(res => {
+        this.setState({error: 'Something went wrong, please try again later.'})
+    })
+
     }
     deleteProject = projectId => {
         const {stitches} = this.state.saved
         const projects = this.state.saved.projects.filter(project=>project.id !== projectId)
-        this.setState({saved: {
-            projects,
-            stitches
-        }})
+        const token = TokenService.getAuthToken()
+
+        fetch(`${config.API_ENDPOINT}/saved_projects/${projectId}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+            })
+        .then(res => {
+            if(!res.ok){
+              return  res.json().then(e => Promise.reject(e))
+            } 
+        })
+        .then(response => {
+            this.setState({
+                saved: {
+                    stitches,
+                    projects: projects
+                }
+            })
+        })
+        .catch(res => {
+        this.setState({error: 'Something went wrong, please try again later.'})
+        })
     }
     render(){
         return(<div className='embroidery-helper'>
