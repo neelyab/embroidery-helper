@@ -10,9 +10,9 @@ class StitchesResults extends Component {
             stitchResults = this.props.stitches.map((stitch, i) => {
                 return(
                 <li key ={i}>
-                    <span className="stitch-name">{stitch.name}</span>
-                    <img className="stitch-image" src={stitch.imageUrl} alt={stitch.name}/>
-                    <p>{stitch.description}</p>
+                    <span className="stitch-name">{stitch.stitch_name}</span>
+                    <img className="stitch-image" src={stitch.image_url} alt={stitch.stitch_name}/>
+                    <p>{stitch.stitch_description}</p>
                     <button type="button" onClick={() => this.props.saveStitch(stitch.id)}>Save</button>
                 </li>
                 )
