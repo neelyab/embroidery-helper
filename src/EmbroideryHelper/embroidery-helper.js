@@ -5,12 +5,13 @@ import Saved from '../Saved/saved';
 import './embroidery-helper.css';
 import config from '../config'
 import TokenService from '../services/token-service'
-
+import loader from '../img/ajax-loader.gif'
 
 class EmbroideryHelper extends Component {
     constructor(props){
         super(props);
         this.state={
+            loading: true,
             searchTerm: null,
             checked: false,
             stitches: null,
@@ -56,6 +57,7 @@ class EmbroideryHelper extends Component {
         .then(([stitches, projects]) => {
             console.log(stitches, projects)
            this.setState({
+               loading: false,
                saved: {
                    stitches,
                    projects
@@ -63,7 +65,10 @@ class EmbroideryHelper extends Component {
            })
         })
         .catch(res => {
-            this.setState({error: 'Something went wrong, please try again later.'})
+            this.setState({
+                loading: false,
+                error: 'Something went wrong, please try again later.'
+            })
         })
     }
     clearResults = () => {
@@ -90,6 +95,7 @@ class EmbroideryHelper extends Component {
         if(!searchTerm) {
             this.setState({error: 'Please select a search term'})
         } else {
+        this.setState({loading: true})
         const searchQuery = searchTerm.split("-")
         const search = searchQuery.join(" ")
         const token = TokenService.getAuthToken()
@@ -109,15 +115,20 @@ class EmbroideryHelper extends Component {
             })
             .then(results => {
                 this.setState({
+                    loading: false,
                     stitchResults: results
                 })
             })
             .catch(res => {
-                this.setState({error: res.error})
+                this.setState({
+                    loading: false,
+                    error: res.error
+                })
             })
 
         // if include projects are checked, search for projects that include stitches
             if (checked) {
+                this.setState({loading: true})
                 const searchQuery = searchTerm.split("-")
                 const search = searchQuery[0]
                 
@@ -137,11 +148,15 @@ class EmbroideryHelper extends Component {
                 })
             .then(results => {
                 this.setState({
+                    loading: false,
                     projectResults: results
                 })
             })
             .catch(res => {
-                this.setState({error: 'Something went wrong, please try again later.'})
+                this.setState({
+                    loading: false,
+                    error: 'Something went wrong, please try again later.'
+                })
             })
             } else {
         //if include projects is not checked, reset projectResults
@@ -296,6 +311,7 @@ class EmbroideryHelper extends Component {
                 searchTerm={this.state.searchTerm}
                 checked={this.state.checked}/>
             {this.state.error && <p>{this.state.error}</p>}
+            {this.state.loading && <img src={loader} alt='loading icon' className='loader'></img>}
             <SearchResults 
                 projects={this.state.projectResults} 
                 stitches={this.state.stitchResults} 

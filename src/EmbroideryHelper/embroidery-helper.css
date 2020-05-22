@@ -5,3 +5,8 @@
     width:100%;
     text-align: center;
   }
+
+  .loader {
+    width: 5%;
+    margin: 0 auto;
+  }
