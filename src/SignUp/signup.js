@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import './signup.css'
 import config from '../config'
+import {Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
-    state = {error: null}
+    state = {
+        error: null,
+        success: false
+    }
     handleSubmit = e => {
         this.setState({error: null})
         e.preventDefault()
@@ -14,7 +18,7 @@ class SignUp extends Component {
         if(password.value.length < 6 ){
             this.setState({error: 'Password must be greater than 6 characters.'})
         }
-        if(!REGEX.test(password)){
+        if(!REGEX.test(password.value)){
             this.setState({error:'Password must contain one upper case, lower case, number and special character.'})
         }
         if(password.value !== repeat_password.value){
@@ -39,11 +43,16 @@ class SignUp extends Component {
                 : res.json()
                  )
             .then(user => {
-                username.value = ''
-                password.value = ''
-                first_name.value = ''
-                repeat_password.value = ''
-                this.props.history.push('/login')
+                // username.value = ''
+                // password.value = ''
+                // first_name.value = ''
+                // repeat_password.value = ''
+                this.setState({error:null})
+                this.setState({success: true})
+                setTimeout(() =>
+                    this.props.history.push('/login'), 2000
+                )
+                
             })
             .catch(res => {
                 this.setState({error: res.error})
@@ -53,6 +62,7 @@ class SignUp extends Component {
     render(){
         return (<div>
             <form className="signup" onSubmit={this.handleSubmit}>
+            {this.state.success && <p class="success-message">Account created! Redirecting to login...</p>}
                 {this.state.error && <p>{this.state.error}</p>}
                 <label htmlFor="first-name">First Name:</label>
                 <input type="text" id="first-name" name="first_name" required></input>

@@ -10,6 +10,7 @@ import loader from '../img/ajax-loader.gif'
 class EmbroideryHelper extends Component {
     constructor(props){
         super(props);
+        this.myRef=React.createRef()
         this.state={
             loading: true,
             searchTerm: null,
@@ -88,6 +89,9 @@ class EmbroideryHelper extends Component {
             checked: !this.state.checked
         })
     }
+    scrollToMyRef = () =>{ 
+        window.scrollTo(0, this.myRef.current.offsetTop)  
+    }
     handleSubmit = e => {
         e.preventDefault();
         const {searchTerm, checked } = this.state
@@ -118,6 +122,7 @@ class EmbroideryHelper extends Component {
                     loading: false,
                     stitchResults: results
                 })
+                this.scrollToMyRef()
             })
             .catch(res => {
                 this.setState({
@@ -312,11 +317,15 @@ class EmbroideryHelper extends Component {
                 checked={this.state.checked}/>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.loading && <img src={loader} alt='loading icon' className='loader'></img>}
+            <div ref={this.myRef}>
             <SearchResults 
                 projects={this.state.projectResults} 
                 stitches={this.state.stitchResults} 
+                savedStitches ={this.state.saved.stitches}
+                savedProjects ={this.state.saved.projects}
                 saveProject={(project) => this.saveProject(project)}
                 saveStitch={(stitch) => this.saveStitch(stitch)}/>
+            </div>
             <Saved 
                 projects={this.state.saved.projects} 
                 stitches={this.state.saved.stitches}
