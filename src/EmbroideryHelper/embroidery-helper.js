@@ -6,12 +6,16 @@ import './embroidery-helper.css';
 import config from '../config'
 import TokenService from '../services/token-service'
 import loader from '../img/ajax-loader.gif'
+import {Route } from 'react-router-dom'
+import PrivateRoute from '../Utils/PrivateRoute';
 
 class EmbroideryHelper extends Component {
     constructor(props){
         super(props);
         this.myRef=React.createRef()
         this.state={
+            searchTab: true,
+            savedTab: false,
             loading: true,
             searchTerm: null,
             checked: false,
@@ -306,8 +310,26 @@ class EmbroideryHelper extends Component {
         this.setState({error: 'Something went wrong, please try again later.'})
         })
     }
+    showSearch = () =>{
+        this.setState({
+            searchTab: true,
+            savedTab: false
+        })
+    }
+    showSaved = () => {
+        this.setState({
+            searchTab: false,
+            savedTab: true
+        })
+    }
     render(){
+       const {searchTab, savedTab} = this.state
         return(<div className='embroidery-helper'>
+            <div className="tabs">
+                <button className={searchTab ? 'search-tab active' : 'search-tab'} onClick={this.showSearch}>Search</button> 
+                <button className={savedTab ? 'saved-tab active' : 'saved-tab'} onClick={this.showSaved}>Saved</button> 
+            </div>
+            {searchTab && 
             <SearchBar 
                 handleUpdate={(e) => this.handleUpdate(e)} 
                 handleCheck={() => this.handleCheck()}
@@ -315,9 +337,11 @@ class EmbroideryHelper extends Component {
                 clearResults={() => this.clearResults()}
                 searchTerm={this.state.searchTerm}
                 checked={this.state.checked}/>
+            }
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.loading && <img src={loader} alt='loading icon' className='loader'></img>}
-            <div ref={this.myRef}>
+            <div ref={this.myRef}> 
+            {searchTab &&
             <SearchResults 
                 projects={this.state.projectResults} 
                 stitches={this.state.stitchResults} 
@@ -325,12 +349,14 @@ class EmbroideryHelper extends Component {
                 savedProjects ={this.state.saved.projects}
                 saveProject={(project) => this.saveProject(project)}
                 saveStitch={(stitch) => this.saveStitch(stitch)}/>
+            }
             </div>
+            {savedTab &&
             <Saved 
                 projects={this.state.saved.projects} 
                 stitches={this.state.saved.stitches}
                 deleteStitch={(stitch)=>this.deleteStitch(stitch)}
-                deleteProject={(project)=>this.deleteProject(project)}/>
+                deleteProject={(project)=>this.deleteProject(project)}/>}
         </div>)
     }
 }
