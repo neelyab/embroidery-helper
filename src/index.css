@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Sacramento&display=swap');
 *, html {
   box-sizing: border-box;
   margin: 0;
@@ -8,16 +10,32 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 1.2em;
-  font-family: arial;
+  font-size: 18px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: #FFFFFF;
+}
+h1, h2, h3 {
+  font-family: 'Sacramento', cursive;
+
+}
+h1 {
+  font-size: 2em;
+  color: black;
 }
 
-code {
+h2 {
+  font-size: 1.8em;
+}
+h3 {
+  font-size: 1.5em;
+}
+
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 footer {
-  background: lightgrey;
+  background:#4AA8D6;
   display: flex;
   justify-content: center;
   width: 100%;

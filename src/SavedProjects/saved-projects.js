@@ -19,7 +19,7 @@ class SavedProjects extends Component {
         savedProjects = null
     }
         return(
-        <div>
+        <div className="saved-projects">
             {projects.length > 0 && <h2>Saved Projects:</h2>}
             <ul className="saved-project-list">{projects && savedProjects}</ul>
         </div>

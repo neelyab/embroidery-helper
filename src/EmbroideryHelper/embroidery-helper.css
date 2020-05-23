@@ -1,12 +1,67 @@
 .embroidery-helper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     width:100%;
     text-align: center;
+    background: #ffffff;
+    color: #515052;
+    font-size: 1.8em;
+  }
+  .embroidery-helper h1 {
+    padding-bottom: 20px;
+  }
+  h1, h2 h3 {
+    font-family: 'Sacramento', cursive;
+    
   }
 
   .loader {
     width: 5%;
     margin: 0 auto;
+  }
+
+  .search-tab, .saved-tab {
+    background: #ffffff;
+    border: #FCAB10 1px solid;
+    border-radius: 5px;
+    color: black;
+
+  }
+  .tabs button {
+    margin: 5px;
+  }
+  button {
+    background-color: #4AA8D6;
+    border: 2px solid #4AA8D6;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+  }
+  button:hover,  select:hover {
+    cursor: pointer;
+  }
+  
+  .active {
+    background: #FCAB10;
+    color: black;
+  }
+
+  @media only screen and (min-width: 400px){
+    .search-tab {
+      border-radius: 0px;
+      border-top-left-radius: 5px;
+      height: 40px;
+    }
+    .saved-tab {
+      border-radius: 0px;
+      border-top-right-radius: 5px;
+      height: 40px;
+    }
+    .tabs button {
+      margin: 0;
+    }
+    .embroidery-helper{
+      min-height: 100vh;
+    }
   }

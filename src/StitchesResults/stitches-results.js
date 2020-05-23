@@ -16,7 +16,7 @@ class StitchesResults extends Component {
                     <span className="stitch-name">{stitch.stitch_name}</span>
                     <img className="stitch-image" src={stitch.image_url} alt={stitch.stitch_name}/>
                     <p>{stitch.stitch_description}</p>
-                    {saved ? <button>Saved</button> : <button type="button" onClick={() => this.props.saveStitch(stitch.id)}>Save</button>}
+                    {saved ? <button className="saved-button">Saved</button> : <button type="button" onClick={() => this.props.saveStitch(stitch.id)}>Save</button>}
                 </li>
                 )
             })

@@ -1,4 +1,24 @@
 .saved-stitches-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     list-style: none;
     padding: 0;
+    max-width:1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+.saved-stitch p {
+    font-size: 0.7em;
+}
+h2 {
+    font-family: 'Sacramento', cursive;
+    text-decoration: underline;
+}
+@media only screen and (min-width: 900px){
+    .saved-stitches-list {
+        flex-direction: row;
+        flex-flow: row wrap;
+    }
 }

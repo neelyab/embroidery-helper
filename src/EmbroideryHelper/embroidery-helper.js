@@ -140,6 +140,7 @@ class EmbroideryHelper extends Component {
                 this.setState({loading: true})
                 const searchQuery = searchTerm.split("-")
                 const search = searchQuery[0]
+                console.log(search)
                 
             fetch(`${config.API_ENDPOINT}/projects/?stitch=${search}`, {
                     method: 'GET',
@@ -156,6 +157,7 @@ class EmbroideryHelper extends Component {
                     }
                 })
             .then(results => {
+                console.log(results)
                 this.setState({
                     loading: false,
                     projectResults: results
@@ -325,6 +327,7 @@ class EmbroideryHelper extends Component {
     render(){
        const {searchTab, savedTab} = this.state
         return(<div className='embroidery-helper'>
+             <h1>Embroidery Helper</h1>
             <div className="tabs">
                 <button className={searchTab ? 'search-tab active' : 'search-tab'} onClick={this.showSearch}>Search</button> 
                 <button className={savedTab ? 'saved-tab active' : 'saved-tab'} onClick={this.showSaved}>Saved</button> 

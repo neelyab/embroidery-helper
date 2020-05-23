@@ -14,7 +14,7 @@ class SearchBar extends Component {
         <form className="search-bar"  onSubmit={e => this.props.handleSubmit(e)}>
             <div className="embroidery-stitches">
                 <label htmlFor="stitch">Please select an embroidery stitch:</label> 
-                <select name = "stitch" className="stitch" onChange={(e) => this.props.handleUpdate(e.target.value)}>
+                <select name = "stitch" className="select-stitch" onChange={(e) => this.props.handleUpdate(e.target.value)}>
                     <option value="" name="choose-a-stitch">Choose a Stitch</option>
                     <option value="back-stitch" name="back-stitch">Back Stitch</option>
                     <option value="french-knot" name="french-knot">French Knot</option>

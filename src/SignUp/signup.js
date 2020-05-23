@@ -18,12 +18,12 @@ class SignUp extends Component {
         if(password.value.length < 6 ){
             this.setState({error: 'Password must be greater than 6 characters.'})
         }
-        if(!REGEX.test(password.value)){
+        else if(!REGEX.test(password.value)){
             this.setState({error:'Password must contain one upper case, lower case, number and special character.'})
         }
-        if(password.value !== repeat_password.value){
+        else if(password.value !== repeat_password.value){
             this.setState({error: 'Passwords do no match.'})
-        }
+        } else {
         const user = {
             username: username.value,
             first_name: first_name.value,
@@ -57,13 +57,14 @@ class SignUp extends Component {
             .catch(res => {
                 this.setState({error: res.error})
             })
+        }
 
     }
     render(){
         return (<div>
             <form className="signup" onSubmit={this.handleSubmit}>
-            {this.state.success && <p class="success-message">Account created! Redirecting to login...</p>}
-                {this.state.error && <p>{this.state.error}</p>}
+            {this.state.success && <p className="success-message">Account created! Redirecting to login...</p>}
+                {this.state.error && <p className="error-message">{this.state.error}</p>}
                 <label htmlFor="first-name">First Name:</label>
                 <input type="text" id="first-name" name="first_name" required></input>
                 <label htmlFor="username">Username:</label>

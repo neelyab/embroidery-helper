@@ -1,8 +1,13 @@
 .search-bar {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 95%;
     margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #FCAB10;
+    border-radius: 5px;
+    color: black;
+    padding: 20px 0 20px 0;
 }
 .filters>input {
     display: inline-block;
@@ -10,17 +15,33 @@
 }
 .filters label {
     display: inline;
+    max-width: 425px;
+    font-size: 0.7em;
 }
 .filters {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
+    width:80%;
+    max-width: 450px;
 }
 button {
-    margin: 5px auto;
+    margin: 8px auto;
     max-width: 200px;
   }
 .stitch {
     font-weight: bold;
 }
+
+.select-stitch{
+    max-width: 300px;
+    padding: 10px 0;
+}
+
+@media only screen and (min-width: 900px){
+    .search-bar{
+      width: 40%;
+      margin: 0 auto;
+    }
+  }

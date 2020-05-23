@@ -5,6 +5,8 @@
     justify-content: center;
     align-items: center;
     padding: 0;
+    max-width:1200px;
+    margin: 0 auto;
 }
 
 .saved-project button {
@@ -13,4 +15,11 @@
 .saved-project a {
     margin-bottom: 10px;
     color: black;
+}
+
+@media only screen and (min-width: 900px){
+    .saved-project-list {
+        flex-direction: row;
+        flex-flow: row wrap;
+}
 }

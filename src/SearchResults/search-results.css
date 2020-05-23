@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #ffffff;
+    width: 95%;
+    min-height: 100vh;
+    margin: 0 auto;
   }
   .stitches-results li, .project-results li {
     display: flex;
@@ -12,11 +16,29 @@
     align-items: center;
     text-align: center;
     max-width: 500px;
-    border: black solid 1px;
-    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #CACBCB;
+    border-radius: 5px;
+    padding: 20px 20px;
     margin: 10px auto;
+    box-shadow: 5px 5px 2px #CACBCB;
   }
   .search-results ul {
     list-style: none;
     padding: 0 10px;
+  }
+
+  .saved-button {
+    background: #CACBCB;
+    border: 1px solid #CACBCB;
+    color: black;
+  }
+  @media only screen and (min-width: 900px){
+    .search-results{
+      width: 80%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+
   }

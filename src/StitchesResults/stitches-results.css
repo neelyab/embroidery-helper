@@ -2,3 +2,12 @@
     width: 80%;
     max-width: 500px;
 }
+.stitch-name, .project-name {
+    font-size: 1.3em;
+}
+.project-name a {
+    color: black;
+}
+.project-name {
+    font-size: 1em;
+}

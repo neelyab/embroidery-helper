@@ -1,3 +1,9 @@
 .login label, input {
     display: block;
 }
+
+
+.loader {
+    width: 5%;
+    margin: 0 auto;
+  }

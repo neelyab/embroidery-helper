@@ -2,13 +2,18 @@ import React, {Component} from 'react'
 import './login.css'
 import TokenService from '../services/token-service'
 import config from '../config'
+import loader from '../img/ajax-loader.gif'
 
 class Login extends Component {
 
-    state = {error: null}
+    state = {
+        error: null,
+        loading: false
+    }
 
     handleSubmit = e => {
         e.preventDefault();
+        this.setState({loading: true})
         const { username, password } = e.target;
         const credentials = { 
                 username: username.value, 
@@ -33,7 +38,10 @@ class Login extends Component {
             this.props.history.push('/')
         })
         .catch(res => {
-            this.setState({error: res.error})
+            this.setState({
+                error: res.error,
+                loading: false
+            })
         })
 
 
@@ -46,8 +54,9 @@ class Login extends Component {
                 <input type="text" id="username" name="username" required></input>
                 <label htmlFor="password">Password:</label>
                 <input type="password" id="password" name="password" required></input>
-                {this.state.error && <p>{this.state.error}</p>}
+                {this.state.error && <p className="error-message">{this.state.error}</p>}
                 <button type="submit">Submit</button>
+                {this.state.loading && <img src={loader} alt="loading icon" className="loader"/>}
             </form>
         </div>)
     }
