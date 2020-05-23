@@ -6,7 +6,6 @@ class ProjectResults extends Component {
 
         let projectResults;
         if (projects){
-            console.log(projects)
             projectResults = projects.map((project, i)=>{
                 const saved = this.props.savedProjects.find(p=> p.id === project.id )
                 return(

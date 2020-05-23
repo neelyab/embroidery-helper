@@ -20,5 +20,6 @@ h2 {
     .saved-stitches-list {
         flex-direction: row;
         flex-flow: row wrap;
+        align-items: flex-start;
     }
 }

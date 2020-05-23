@@ -8,17 +8,7 @@
     margin-bottom: 10px;
     z-index: 1;
   }
-  /* .box {
-    z-index: 1;
-    background-color:blue;
-    width: 50%;
-    max-height: 400px;
-    max-width: 400px;
-    display: flex;
-    position:relative; 
-    top:10px; 
-    left:80px; 
-  } */
+
   .about {
    display: flex;
     justify-content: center;
@@ -31,15 +21,7 @@
     margin: auto;
     margin-bottom: 30px;
   }
-  /* .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    background: blue;
-    
-  } */
+
 .about p {
     text-align: center;
     width: 80%;

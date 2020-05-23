@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import './saved-projects.css'
-import StitchesResults from '../StitchesResults/stitches-results';
 
 class SavedProjects extends Component {
     render() {

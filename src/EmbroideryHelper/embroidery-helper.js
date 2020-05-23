@@ -6,8 +6,7 @@ import './embroidery-helper.css';
 import config from '../config'
 import TokenService from '../services/token-service'
 import loader from '../img/ajax-loader.gif'
-import {Route } from 'react-router-dom'
-import PrivateRoute from '../Utils/PrivateRoute';
+
 
 class EmbroideryHelper extends Component {
     constructor(props){
@@ -60,7 +59,6 @@ class EmbroideryHelper extends Component {
                 return Promise.all([stitchRes.json(), projectRes.json()])
         })
         .then(([stitches, projects]) => {
-            console.log(stitches, projects)
            this.setState({
                loading: false,
                saved: {
@@ -140,7 +138,7 @@ class EmbroideryHelper extends Component {
                 this.setState({loading: true})
                 const searchQuery = searchTerm.split("-")
                 const search = searchQuery[0]
-                console.log(search)
+              
                 
             fetch(`${config.API_ENDPOINT}/projects/?stitch=${search}`, {
                     method: 'GET',
@@ -157,7 +155,7 @@ class EmbroideryHelper extends Component {
                     }
                 })
             .then(results => {
-                console.log(results)
+                
                 this.setState({
                     loading: false,
                     projectResults: results
@@ -224,7 +222,7 @@ class EmbroideryHelper extends Component {
         const number = stitches.filter(stitch => stitch.id === stitchId).length
         if (number > 0){
                 this.setState({error: 'Stitch already saved'})
-                console.log('stitch already saved')
+               
             }
          else {
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitch.id}`, {
@@ -253,7 +251,7 @@ class EmbroideryHelper extends Component {
     }
     }
     deleteStitch = stitchId => {
-        console.log(stitchId)
+    
         const {projects} = this.state.saved
         const stitches = this.state.saved.stitches.filter(stitch=> stitch.id !== stitchId )
         const token = TokenService.getAuthToken()
