@@ -7,12 +7,16 @@ import SignUp from './SignUp/signup';
 import About from './About/about';
 import PublicRoute from './Utils/PublicOnlyRoute'
 import PrivateRoute from './Utils/PrivateRoute'
+import Home from './Home/home'
+import Demo from './Demo/demo'
 
 function App() {
   return (
     <main className='App'>
       <Route path='/' component={Nav}/>
-      <PrivateRoute exact path='/' component={EmbroideryHelper}/>
+      <PublicRoute exact path='/' component={Home}/>
+      <PublicRoute path ='/demo' component={Demo}/>
+      <PrivateRoute exact path='/dashboard' component={EmbroideryHelper}/>
       <PublicRoute path='/login' component={Login}/>
       <PublicRoute path='/sign-up' component={SignUp}/>
       <Route path='/about' component={About}/>

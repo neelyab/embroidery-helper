@@ -1,0 +1,47 @@
+ .embroidery-tooltip {
+    visibility: hidden;
+    width: 120px;
+    font-weight: 500;
+    font-size: 0.7em;
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: #77c339e5;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    margin-top: 40px;
+    position: absolute;
+    z-index: 1;
+}
+
+.embroidery-stitches:hover .embroidery-tooltip {
+    visibility: visible;
+}
+
+
+.search-results-demo:hover .embroidery-tooltip {
+    visibility: visible;
+}
+
+.saved-demo:hover .embroidery-tooltip {
+    visibility: visible;
+}
+.tabs {
+    width: 70%;
+    margin: 0 auto;
+}
+.tabs:hover .embroidery-tooltip {
+  visibility: visible;
+}
+
+.tooltip-icon {
+    height: 16px;
+    width: 16px;
+}
+
+@media only screen and (max-width: 400px) {
+    .embroidery-tooltip{
+       left: 200px;
+    }
+
+}
