@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './about.css';
-import '../../src/index.css'
-import stitch from '../../src/img/embroidery-stitch-diagram.JPG'
-import embroidery from '../../src/img/embroidery.jpg'
-import savedProjects from '../../src/img/saved-projects.jpeg'
+import '../../src/index.css';
+import stitch from '../../src/img/embroidery-stitch-diagram.JPG';
+import embroidery from '../../src/img/embroidery.jpg';
+import savedProjects from '../../src/img/saved-projects.jpeg';
 
 class About extends Component {
    

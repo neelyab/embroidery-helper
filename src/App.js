@@ -5,10 +5,10 @@ import EmbroideryHelper from './EmbroideryHelper/embroidery-helper';
 import Login from './Login/login';
 import SignUp from './SignUp/signup';
 import About from './About/about';
-import PublicRoute from './Utils/PublicOnlyRoute'
-import PrivateRoute from './Utils/PrivateRoute'
-import Home from './Home/home'
-import Demo from './Demo/demo'
+import PublicRoute from './Utils/PublicOnlyRoute';
+import PrivateRoute from './Utils/PrivateRoute';
+import Home from './Home/home';
+import Demo from './Demo/demo';
 
 function App() {
   return (

@@ -3,23 +3,21 @@ import SearchBar from '../SearchBar/search-bar';
 import SearchResults from '../SearchResults/search-results';
 import Saved from '../Saved/saved';
 import './embroidery-helper.css';
-import config from '../config'
-import TokenService from '../services/token-service'
-import loader from '../img/ajax-loader.gif'
+import config from '../config';
+import TokenService from '../services/token-service';
+import loader from '../img/ajax-loader.gif';
 
 
 class EmbroideryHelper extends Component {
     constructor(props){
         super(props);
-        this.myRef=React.createRef()
+        this.myRef=React.createRef();
         this.state={
             searchTab: true,
             savedTab: false,
             loading: true,
             searchTerm: null,
             checked: false,
-            stitches: null,
-            projects: null,
             stitchResults: null,
             projectResults: null,
             error: null,
@@ -27,10 +25,10 @@ class EmbroideryHelper extends Component {
                 stitches: [],
                 projects: [],
                 }
-        }
+        };
     }
     componentDidMount(){
-        const token = TokenService.getAuthToken()
+        const token = TokenService.getAuthToken();
    // get saved stitches and projects
         Promise.all([
             fetch(`${config.API_ENDPOINT}/saved_stitches/`, {
@@ -48,15 +46,14 @@ class EmbroideryHelper extends Component {
                 }
             })
         ])
-
         .then(([stitchRes, projectRes]) => {
-                if(!stitchRes.ok){
+            if(!stitchRes.ok){
                 stitchRes.json().then(e => Promise.reject(e))
-                } 
-                if(!projectRes.ok){
-                    projectRes.json().then(e => Promise.reject(e))
-                    } 
-                return Promise.all([stitchRes.json(), projectRes.json()])
+            } 
+            if(!projectRes.ok){
+                projectRes.json().then(e => Promise.reject(e))
+            } 
+            return Promise.all([stitchRes.json(), projectRes.json()])
         })
         .then(([stitches, projects]) => {
            this.setState({
@@ -65,46 +62,50 @@ class EmbroideryHelper extends Component {
                    stitches,
                    projects
                }
-           })
+           });
         })
         .catch(res => {
             this.setState({
                 loading: false,
                 error: 'Something went wrong, please try again later.'
-            })
+            });
         })
     }
     clearResults = () => {
         this.setState({
             stitchResults: null,
             projectResults: null
-        })
+        });
     }
     handleUpdate = search => {
         this.setState({
             searchTerm: search, 
             error: null
-        })
+        });
     }
     handleCheck = () => {
         this.setState({
             checked: !this.state.checked
-        })
+        });
     }
-    scrollToMyRef = () =>{ 
-        window.scrollTo(0, this.myRef.current.offsetTop)  
+    scrollToMyRef = () => { 
+        window.scrollTo(0, this.myRef.current.offsetTop);  
     }
     handleSubmit = e => {
         e.preventDefault();
-        const {searchTerm, checked } = this.state
-        // error message if stitch seleciton is left null
+        const { searchTerm, checked } = this.state;
+        // error message if stitch selection is left null
         if(!searchTerm) {
-            this.setState({error: 'Please select a search term'})
+            this.setState({
+                error: 'Please select a search term'
+            });
         } else {
-        this.setState({loading: true})
-        const searchQuery = searchTerm.split("-")
-        const search = searchQuery.join(" ")
-        const token = TokenService.getAuthToken()
+            this.setState({
+                loading: true
+            });
+            const searchQuery = searchTerm.split("-");
+            const search = searchQuery.join(" ");
+            const token = TokenService.getAuthToken();
             fetch(`${config.API_ENDPOINT}/stitches/?stitch=${search}`, {
                     method: 'GET',
                     headers: {
@@ -114,30 +115,32 @@ class EmbroideryHelper extends Component {
                     })
             .then(res => {
                     if(!res.ok){
-                      return  res.json().then(e => Promise.reject(e))
+                      return  res.json().then(e => Promise.reject(e));
                     } else {
-                    return res.json()
+                    return res.json();
                     }
             })
             .then(results => {
                 this.setState({
                     loading: false,
                     stitchResults: results
-                })
-                this.scrollToMyRef()
+                });
+                this.scrollToMyRef();
             })
             .catch(res => {
                 this.setState({
                     loading: false,
                     error: res.error
-                })
-            })
+                });
+            });
 
         // if include projects are checked, search for projects that include stitches
             if (checked) {
-                this.setState({loading: true})
-                const searchQuery = searchTerm.split("-")
-                const search = searchQuery[0]
+                this.setState({
+                    loading: true
+                });
+                const searchQuery = searchTerm.split("-");
+                const search = searchQuery[0];
               
                 
             fetch(`${config.API_ENDPOINT}/projects/?stitch=${search}`, {
@@ -149,40 +152,42 @@ class EmbroideryHelper extends Component {
                     })
             .then(res => {
                     if(!res.ok){
-                      return  res.json().then(e => Promise.reject(e))
+                      return  res.json().then(e => Promise.reject(e));
                     } else {
-                    return res.json()
+                    return res.json();
                     }
                 })
             .then(results => {
-                
                 this.setState({
                     loading: false,
                     projectResults: results
-                })
+                });
             })
             .catch(res => {
                 this.setState({
                     loading: false,
                     error: 'Something went wrong, please try again later.'
-                })
-            })
+                });
+              })
             } else {
         //if include projects is not checked, reset projectResults
                 this.setState({
                     projectResults: null
-                })
+                });
             }
         }
     }
     saveProject = projectId => {
-        const token = TokenService.getAuthToken()
-        const {stitches, projects} = this.state.saved
-        const project = this.state.projectResults.find(p => p.id === projectId)
+        const token = TokenService.getAuthToken();
+        const {stitches, projects} = this.state.saved;
+        const project = this.state.projectResults.find(p => p.id === projectId);
+
          //check to see if project has already been saved 
-        const number = projects.filter(project => project.id === projectId).length
+        const number = projects.filter(project => project.id === projectId).length;
         if (number !== 0){
-            this.setState({error: 'Project already saved'})
+            this.setState({
+                error: 'Project already saved'
+            });
         } else {
             fetch(`${config.API_ENDPOINT}/saved_projects/${project.id}`, {
                 method: 'POST',
@@ -193,36 +198,41 @@ class EmbroideryHelper extends Component {
                 })
             .then(res => {
                 if(!res.ok){
-                  return  res.json().then(e => Promise.reject(e))
+                  return  res.json().then(e => Promise.reject(e));
                 } 
             })
             .then(response => {
-            this.setState({
-                saved: {
-                    stitches,
-                    projects: [...projects, project]
-                }
-            })
+                this.setState({
+                    saved: {
+                        stitches,
+                        projects: [...projects, project]
+                    }
+                });
             })
             .catch(res => {
-                this.setState({error: 'Something went wrong, please try again later.'})
+                this.setState({
+                    error: 'Something went wrong, please try again later.'
+                });
             })
         }
-        this.setState({saved:{
-            stitches,
-            projects
-        }
-        })
+        this.setState({
+            saved:{
+                stitches,
+                projects
+            }
+        });
     }
     saveStitch = stitchId => {
-        const token = TokenService.getAuthToken()
-        const {projects, stitches } = this.state.saved
-        const stitch = this.state.stitchResults.find(s => s.id === stitchId)
+        const token = TokenService.getAuthToken();
+        const { projects, stitches } = this.state.saved;
+        const stitch = this.state.stitchResults.find(s => s.id === stitchId);
+
          //check to see if stitch has already been saved 
-        const number = stitches.filter(stitch => stitch.id === stitchId).length
+        const number = stitches.filter(stitch => stitch.id === stitchId).length;
         if (number > 0){
-                this.setState({error: 'Stitch already saved'})
-               
+                this.setState({
+                    error: 'Stitch already saved'
+                });
             }
          else {
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitch.id}`, {
@@ -234,7 +244,7 @@ class EmbroideryHelper extends Component {
                 })
         .then(res => {
                 if(!res.ok){
-                  return  res.json().then(e => Promise.reject(e))
+                  return  res.json().then(e => Promise.reject(e));
                 } 
         })
         .then(response => {
@@ -243,18 +253,20 @@ class EmbroideryHelper extends Component {
                     stitches: [...stitches, stitch],
                     projects
                 }
-            })
+            });
         })
         .catch(res => {
-            this.setState({error: 'Something went wrong, please try again later.'})
+            this.setState({
+                error: 'Something went wrong, please try again later.'
+            });
         })
     }
     }
     deleteStitch = stitchId => {
     
-        const {projects} = this.state.saved
-        const stitches = this.state.saved.stitches.filter(stitch=> stitch.id !== stitchId )
-        const token = TokenService.getAuthToken()
+        const { projects } = this.state.saved;
+        const stitches = this.state.saved.stitches.filter(stitch => stitch.id !== stitchId );
+        const token = TokenService.getAuthToken();
 
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitchId}`, {
             method: 'DELETE',
@@ -262,10 +274,10 @@ class EmbroideryHelper extends Component {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-            })
+        })
         .then(res => {
             if(!res.ok){
-              return  res.json().then(e => Promise.reject(e))
+              return  res.json().then(e => Promise.reject(e));
             } 
         })
         .then(response => {
@@ -274,17 +286,19 @@ class EmbroideryHelper extends Component {
                     stitches: stitches,
                     projects
                 }
-            })
+            });
         })
         .catch(res => {
-        this.setState({error: 'Something went wrong, please try again later.'})
-    })
+            this.setState({
+                error: 'Something went wrong, please try again later.'
+            });
+        })
 
     }
     deleteProject = projectId => {
-        const {stitches} = this.state.saved
-        const projects = this.state.saved.projects.filter(project=>project.id !== projectId)
-        const token = TokenService.getAuthToken()
+        const { stitches } = this.state.saved;
+        const projects = this.state.saved.projects.filter(project => project.id !== projectId);
+        const token = TokenService.getAuthToken();
 
         fetch(`${config.API_ENDPOINT}/saved_projects/${projectId}`, {
             method: 'DELETE',
@@ -295,7 +309,7 @@ class EmbroideryHelper extends Component {
             })
         .then(res => {
             if(!res.ok){
-              return  res.json().then(e => Promise.reject(e))
+              return  res.json().then(e => Promise.reject(e));
             } 
         })
         .then(response => {
@@ -304,27 +318,29 @@ class EmbroideryHelper extends Component {
                     stitches,
                     projects: projects
                 }
-            })
+            });
         })
         .catch(res => {
-        this.setState({error: 'Something went wrong, please try again later.'})
-        })
+            this.setState({
+                error: 'Something went wrong, please try again later.'})
+            });
     }
     showSearch = () =>{
         this.setState({
             searchTab: true,
             savedTab: false
-        })
+        });
     }
     showSaved = () => {
         this.setState({
             searchTab: false,
             savedTab: true
-        })
+        });
     }
     render(){
-       const {searchTab, savedTab} = this.state
-        return(<div className='embroidery-helper'>
+       const { searchTab, savedTab } = this.state;
+        return(
+        <div className='embroidery-helper'>
              <h1>Embroidery Helper</h1>
             <div className="tabs">
                 <button className={searchTab ? 'search-tab active' : 'search-tab'} onClick={this.showSearch}>Search</button> 
@@ -356,8 +372,8 @@ class EmbroideryHelper extends Component {
             <Saved 
                 projects={this.state.saved.projects} 
                 stitches={this.state.saved.stitches}
-                deleteStitch={(stitch)=>this.deleteStitch(stitch)}
-                deleteProject={(project)=>this.deleteProject(project)}/>}
+                deleteStitch={(stitch) => this.deleteStitch(stitch)}
+                deleteProject={(project) => this.deleteProject(project)}/>}
         </div>)
     }
 }

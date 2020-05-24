@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import './saved-projects.css'
+import React, {Component} from 'react';
+import './saved-projects.css';
 
 class SavedProjects extends Component {
     render() {
@@ -11,11 +11,11 @@ class SavedProjects extends Component {
             <li key={project.id} className="saved-project">
                 <a href={project.project_url} target="_blank" rel= "noopener noreferrer">{project.project_name}</a>
                 <img src={project.image_url} alt={project.project_name}/>
-                <button type="button" onClick={()=>this.props.deleteProject(project.id)}>Delete</button>
+                <button type="button" onClick={() => this.props.deleteProject(project.id)}>Delete</button>
             </li>)
         }
     )} else {
-        savedProjects = null
+        savedProjects = null;
     }
         return(
         <div className="saved-projects">

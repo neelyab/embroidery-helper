@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import './login.css'
-import TokenService from '../services/token-service'
-import config from '../config'
-import loader from '../img/ajax-loader.gif'
+import React, {Component} from 'react';
+import './login.css';
+import TokenService from '../services/token-service';
+import config from '../config';
+import loader from '../img/ajax-loader.gif';
 
 class Login extends Component {
 
@@ -13,12 +13,14 @@ class Login extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.setState({loading: true})
+        this.setState({
+            loading: true
+        });
         const { username, password } = e.target;
         const credentials = { 
                 username: username.value, 
                 password: password.value
-            }
+            };
         fetch(`${config.API_ENDPOINT}/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -31,17 +33,17 @@ class Login extends Component {
                 ? res.json().then(e => Promise.reject(e))
                 : res.json()
         )
-        .then(res=> {
+        .then(res => {
             username.value = ''
             password.value = ''
-            TokenService.saveAuthToken(res.authToken)
-            this.props.history.push('/')
+            TokenService.saveAuthToken(res.authToken);
+            this.props.history.push('/');
         })
         .catch(res => {
             this.setState({
                 error: res.error,
                 loading: false
-            })
+            });
         })
 
 
@@ -51,9 +53,9 @@ class Login extends Component {
         return (<div>
             <form className="login" onSubmit={this.handleSubmit}>
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" required></input>
+                    <input type="text" id="username" name="username" required></input>
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" required></input>
+                    <input type="password" id="password" name="password" required></input>
                 {this.state.error && <p className="error-message">{this.state.error}</p>}
                 <button type="submit">Submit</button>
                 {this.state.loading && <img src={loader} alt="loading icon" className="loader"/>}

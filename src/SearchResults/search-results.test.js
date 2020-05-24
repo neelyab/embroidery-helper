@@ -4,7 +4,7 @@ import SearchResults from './search-results'
 
 
 
-it('renders without crashing', ()=>{
+it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<SearchResults />, div);
     ReactDOM.unmountComponentAtNode(div)

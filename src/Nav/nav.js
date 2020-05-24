@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './nav.css';
-import TokenService from '../services/token-service'
+import TokenService from '../services/token-service';
 
 class Nav extends Component {
     logout = () => {
-        TokenService.clearAuthToken()
+        TokenService.clearAuthToken();
     }
     render(){
-        const token = TokenService.hasAuthToken()
+        const token = TokenService.hasAuthToken();
         return(
             <nav>
                <Link to='/'><li>Home</li></Link>

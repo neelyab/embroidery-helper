@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import SearchResults from '../SearchResults/search-results'
-import Saved from '../Saved/saved'
-import './demo.css'
-import tooltip from '../../src/img/tooltip.png'
+import React, {Component} from 'react';
+import SearchResults from '../SearchResults/search-results';
+import Saved from '../Saved/saved';
+import './demo.css';
+import tooltip from '../../src/img/tooltip.png';
 
 class Demo extends Component {
     constructor(props){
@@ -12,7 +12,7 @@ class Demo extends Component {
             savedTab: false
         }
     }
-    showSearch = () =>{
+    showSearch = () => {
         this.setState({
             searchTab: true,
             savedTab: false
@@ -44,7 +44,7 @@ class Demo extends Component {
         const {searchTab, savedTab} = this.state
          return(
             <div className='embroidery-helper'>
-              <h1>Embroidery Helper</h1>
+             <h1>Embroidery Helper</h1>
              <div className="tabs">
                  <span className="embroidery-tooltip">Toggle between search results and saved items</span>
                  <img src={tooltip} alt="tooltip icon" className="tooltip-icon"/>
@@ -77,8 +77,8 @@ class Demo extends Component {
              <SearchResults 
                  projects={project} 
                  stitches={stitch} 
-                 savedStitches ={stitch}
-                 savedProjects ={project}/>
+                 savedStitches={stitch}
+                 savedProjects={project}/>
                  </div>}
              </div>
              {savedTab &&
