@@ -31,7 +31,6 @@ class Demo extends Component {
         const project = [{
             image_url: 'https://i.imgur.com/60yukoG.png',
             project_url: 'https://crewelghoul.com/blog/leaf-rubbing-embroidery/',
-            project_description: 'al;sdfkj',
             project_name: 'Leaf Rubbing Embroidery',
             stitches: 'back stitch',
             id: 1
@@ -43,33 +42,34 @@ class Demo extends Component {
             id: 1
         }]
         const {searchTab, savedTab} = this.state
-         return(<div className='embroidery-helper'>
+         return(
+            <div className='embroidery-helper'>
               <h1>Embroidery Helper</h1>
              <div className="tabs">
                  <span className="embroidery-tooltip">Toggle between search results and saved items</span>
                  <img src={tooltip} alt="tooltip icon" className="tooltip-icon"/>
                  <button className={searchTab ? 'search-tab active' : 'search-tab'} onClick={this.showSearch}>Search</button> 
                  <button className={savedTab ? 'saved-tab active' : 'saved-tab'} onClick={this.showSaved}>Saved</button> 
-             </div>
+            </div>
              {searchTab && 
              <form className="search-bar">
-             <div className="embroidery-stitches">
-                 <label htmlFor="stitch" className="stitch">Please select an embroidery stitch: 
-                 <img src={tooltip} alt="tooltip icon" className="tooltip-icon"/>
-                 <span className="embroidery-tooltip">choose from a variety of stitches</span></label> 
-                 <select name = "stitch" className="select-stitch" >
-                     <option value="back-stitch" name="back-stitch">Back Stitch</option>
-                  </select>
-             </div>
-             <div className="filters"> 
-                 <label htmlFor="include-projects">Search for projects that include <span className='stitch'>back stitch</span>:</label>
-                 <input type="checkbox" name="include-projects" value="include-projects" />
-             </div>
-             <button type="button">Submit</button>
-             <button type="button">Clear Results</button>
-         </form>
+                <div className="embroidery-stitches">
+                    <label htmlFor="stitch" className="stitch">Please select an embroidery stitch: 
+                    <img src={tooltip} alt="tooltip icon" className="tooltip-icon"/>
+                    <span className="embroidery-tooltip">choose from a variety of stitches</span></label> 
+                    <select name = "stitch" className="select-stitch" >
+                        <option value="back-stitch" name="back-stitch">Back Stitch</option>
+                    </select>
+                </div>
+                <div className="filters"> 
+                    <label htmlFor="include-projects">Search for projects that include <span className='stitch'>back stitch</span>:</label>
+                    <input type="checkbox" name="include-projects" value="include-projects" />
+                </div>
+                <button type="button">Submit</button>
+                <button type="button">Clear Results</button>
+            </form>
              }
-             <div ref={this.myRef} >
+             <div>
              {searchTab &&
              <div className="search-results-demo">
              <span className="embroidery-tooltip">View and save stitches and projects</span>

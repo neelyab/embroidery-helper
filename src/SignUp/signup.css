@@ -2,7 +2,7 @@
     display: block;
 }
 .signup, .login {
-    min-height: 800px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     padding: 30px 0;
@@ -10,9 +10,12 @@
     margin: 0 auto;
   }
 .password-require {
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
-
+.signup input, .signup label, .login label, .login input, .signup p {
+    max-width: 500px;
+    margin: 0 auto;
+}
 .success-message {
     color: #44AF69;
     text-align: center;

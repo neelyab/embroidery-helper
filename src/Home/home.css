@@ -7,4 +7,23 @@
     text-align: center;
     min-height: 100vh;
     padding-top: 100px;
+    background: url(../img/embroidery-cover-photo.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.home {
+    background: rgba(251, 251, 251, 0.904);
+    width: 90%;
+    margin: 0 auto;
+    padding: 50px 50px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+@media only screen and (min-width: 768px){
+    .home {
+    font-size: 2em;
+    width: 50%;
+    }
 }

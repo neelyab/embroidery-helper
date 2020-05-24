@@ -1,3 +1,4 @@
+
 .img {
     width: 50%;
     min-width: 300px;
@@ -10,16 +11,20 @@
   }
 
   .about {
-   display: flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center; 
     min-height: 300px;
     padding: 30px 30px;
-    background-color:rgb(72, 166, 213);
+    background-color:rgba(252, 169, 16, 0.794);
     max-width: 500px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 5px;
+    
   }
 
 .about p {
@@ -27,7 +32,7 @@
     width: 80%;
     font-weight: 500;
     max-width: 470px;
-    background: #FCAB10;
+    background: rgb(255, 255, 255);
     padding: 10px 10px;
     z-index: 2;
     position: relative;

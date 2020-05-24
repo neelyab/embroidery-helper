@@ -9,21 +9,17 @@ class About extends Component {
    
     render(){
         return(
-        <div>
+        <div className="about-page">
             <section className="about">
-
                 <img className="img" src={embroidery} alt='embroidery'/>
-                <p>Hand embroidery helper allows you to easily learn embroidery stitches and techniques through clear instructions and fun modern projects that you can apply your new stitching skills to.</p>
-            
+                <p>Hand embroidery helper allows you to easily learn embroidery stitches and techniques through clear instructions and fun modern projects that you can apply your new stitching skills to.</p>      
             </section>
             <section className="about">
-            <div className="box">
-            </div>
-            <img className="img" src={stitch} alt ='stitch diagram'/>
+                <img className="img" src={stitch} alt ='stitch diagram'/>
                 <p>Clear instructions and diagrams help you learn easier and faster!</p>
             </section>
             <section className="about">
-            <div className="box"></div><img className="img" src={savedProjects} alt='saved embroidery projects'/>
+                <img className="img" src={savedProjects} alt='saved embroidery projects'/>
                 <p>Save projects and stitches you'd like to learn. With hand embroidery helper, you're able to keep a list of stitches and projects you're interested in learning to stitch.</p>
             </section>
         </div>)
