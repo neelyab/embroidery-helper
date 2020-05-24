@@ -17,9 +17,18 @@ class SearchBar extends Component {
                 <select name = "stitch" className="select-stitch" onChange={(e) => this.props.handleUpdate(e.target.value)}>
                     <option value="" name="choose-a-stitch">Choose a Stitch</option>
                     <option value="back-stitch" name="back-stitch">Back Stitch</option>
+                    <option value="chain-stitch" name="chain-stitch">Chain Stitch</option>
+                    <option value="bullion-knot" name="bullion-knot">Bullion Knot</option>
+                    <option value="fishbone-stitch" name="fishbone-stitch">Fishbone Stitch</option>
+                    <option value="fly-stitch" name="fly-stitch">Fly Stitch</option>
                     <option value="french-knot" name="french-knot">French Knot</option>
                     <option value="satin-stitch" name="satin-stitch">Satin Stitch</option>
+                    <option value="short-and-long-stitch" name="short-and-long-stitch">Short and Long Stitch</option>
+                    <option value="split-stitch" name="split-stitch">Split Stitch</option>
                     <option value="stem-stitch" name="stem-stitch">Stem Stitch</option>
+                    <option value="woven-wheel" name="woven-wheel">Woven Wheel</option>
+                    
+
                 </select>
             </div>
             <div className="filters"> 
