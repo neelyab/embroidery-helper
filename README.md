@@ -14,5 +14,7 @@ The hand embroidery app is a full stack application that helps the user learn ho
 ## Screenshots
 
 ![ home screen](./src/img/home-screen.jpg)
+
 ![ search results screen](./src/img/search-results.jpg)
-![ saved projects and stitches screen](./src/img/saved-projects-and-stitches)
+
+![ saved projects and stitches screen](./src/img/saved-projects-and-stitches.jpg)
