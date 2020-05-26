@@ -7,7 +7,7 @@ import tooltip from '../../src/img/tooltip.png';
 class Demo extends Component {
     constructor(props){
         super(props);
-        this.state ={
+        this.state = {
             searchTab: true,
             savedTab: false
         }
@@ -70,7 +70,9 @@ class Demo extends Component {
             </form>
              }
              <div>
+             
              {searchTab &&
+             // toggle between search and saved tab
              <div className="search-results-demo">
              <span className="embroidery-tooltip">View and save stitches and projects</span>
              <img src={tooltip} alt="tooltip icon" className="tooltip-icon"/>

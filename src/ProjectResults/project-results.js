@@ -6,6 +6,7 @@ class ProjectResults extends Component {
         let projectResults;
         if (projects){
             projectResults = projects.map((project, i) => {
+                // find projects that are already saved in the project results and render save or saved button accordingly
                 const saved = this.props.savedProjects.find(p => p.id === project.id);
                 return(
                     <li key={i}>

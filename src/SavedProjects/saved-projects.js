@@ -6,6 +6,7 @@ class SavedProjects extends Component {
         const {projects} = this.props || {}
         let savedProjects;
         if (projects) {
+            // if there are saved projects, render the projects
             savedProjects = projects.map(project => {
             return(
             <li key={project.id} className="saved-project">
@@ -18,6 +19,7 @@ class SavedProjects extends Component {
         savedProjects = null;
     }
         return(
+            // if there are saved projects, render them and show h2, otherwise render empty ul 
         <div className="saved-projects">
             {projects.length > 0 && <h2>Saved Projects:</h2>}
             <ul className="saved-project-list">{projects && savedProjects}</ul>

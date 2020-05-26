@@ -10,6 +10,7 @@ class Nav extends Component {
     render(){
         const token = TokenService.hasAuthToken();
         return(
+            // render links according to whether or not there is an authToken present
             <nav>
                <Link to='/'><li>Home</li></Link>
                 {!token ? 

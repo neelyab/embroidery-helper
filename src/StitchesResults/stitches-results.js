@@ -8,7 +8,9 @@ class StitchesResults extends Component {
         const { stitches } = this.props;
         let stitchResults;
         if (stitches) {
+            // if there are results for the stitch, render them 
             stitchResults = this.props.stitches.map((stitch, i) => {
+                // find any stitches are already saved and render the save or saved button accordingly
                 const saved = this.props.savedStitches.find(s => s.id === stitch.id);
                 return(
                 <li key ={i}>

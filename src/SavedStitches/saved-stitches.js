@@ -6,6 +6,7 @@ class SavedStitches extends Component {
         const { stitches } = this.props; 
         let savedStitches;
         if(stitches) {
+            // if saved stitches are present, render them
             savedStitches = stitches.map((stitch) => {
             return(
             <li key={stitch.id} className="saved-stitch">
@@ -20,6 +21,7 @@ class SavedStitches extends Component {
         savedStitches = null;
         }
         return(
+            // if there are saved stitches present, render and show h2, otherwise render empty ul
         <div>
             {stitches.length > 0 && <h2>Saved Stitches:</h2>}
             <ul className="saved-stitches-list">{stitches && savedStitches}</ul>

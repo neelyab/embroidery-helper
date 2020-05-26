@@ -29,7 +29,7 @@ class EmbroideryHelper extends Component {
     }
     componentDidMount(){
         const token = TokenService.getAuthToken();
-   // get saved stitches and projects
+   // get saved stitches and projects when component mounts
         Promise.all([
             fetch(`${config.API_ENDPOINT}/saved_stitches/`, {
                     method: 'GET',
@@ -56,6 +56,7 @@ class EmbroideryHelper extends Component {
             return Promise.all([stitchRes.json(), projectRes.json()])
         })
         .then(([stitches, projects]) => {
+            // loading icon set to false once projects and stitches are fetched
            this.setState({
                loading: false,
                saved: {
@@ -72,6 +73,7 @@ class EmbroideryHelper extends Component {
         })
     }
     clearResults = () => {
+        //clear search results
         this.setState({
             stitchResults: null,
             projectResults: null
@@ -84,11 +86,13 @@ class EmbroideryHelper extends Component {
         });
     }
     handleCheck = () => {
+        // this toggles checkbox to include projects between true and false
         this.setState({
             checked: !this.state.checked
         });
     }
     scrollToMyRef = () => { 
+        // once search results are displayed, auto scroll to the top of the results
         window.scrollTo(0, this.myRef.current.offsetTop);  
     }
     handleSubmit = e => {
@@ -125,6 +129,7 @@ class EmbroideryHelper extends Component {
                     loading: false,
                     stitchResults: results
                 });
+                // scroll to the first result
                 this.scrollToMyRef();
             })
             .catch(res => {
@@ -180,6 +185,7 @@ class EmbroideryHelper extends Component {
     saveProject = projectId => {
         const token = TokenService.getAuthToken();
         const {stitches, projects} = this.state.saved;
+        //find the projectId within the projectResults
         const project = this.state.projectResults.find(p => p.id === projectId);
 
          //check to see if project has already been saved 
@@ -189,6 +195,7 @@ class EmbroideryHelper extends Component {
                 error: 'Project already saved'
             });
         } else {
+            // post saved project
             fetch(`${config.API_ENDPOINT}/saved_projects/${project.id}`, {
                 method: 'POST',
                 headers: {
@@ -235,6 +242,7 @@ class EmbroideryHelper extends Component {
                 });
             }
          else {
+             // post saved stitch
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitch.id}`, {
                 method: 'POST',
                 headers: {
@@ -265,9 +273,10 @@ class EmbroideryHelper extends Component {
     deleteStitch = stitchId => {
     
         const { projects } = this.state.saved;
+        // filter the stitch out of the saved stitches array
         const stitches = this.state.saved.stitches.filter(stitch => stitch.id !== stitchId );
         const token = TokenService.getAuthToken();
-
+        // delete the stitch 
         fetch(`${config.API_ENDPOINT}/saved_stitches/${stitchId}`, {
             method: 'DELETE',
             headers: {
@@ -297,9 +306,10 @@ class EmbroideryHelper extends Component {
     }
     deleteProject = projectId => {
         const { stitches } = this.state.saved;
+        //filter the project out of the saved projects array
         const projects = this.state.saved.projects.filter(project => project.id !== projectId);
         const token = TokenService.getAuthToken();
-
+        // delete the project 
         fetch(`${config.API_ENDPOINT}/saved_projects/${projectId}`, {
             method: 'DELETE',
             headers: {
@@ -325,7 +335,9 @@ class EmbroideryHelper extends Component {
                 error: 'Something went wrong, please try again later.'})
             });
     }
-    showSearch = () =>{
+    // toggle between search and saved tab
+    showSearch = () => {
+        
         this.setState({
             searchTab: true,
             savedTab: false

@@ -14,6 +14,7 @@ class Login extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.setState({
+            // show loading icon until response
             loading: true
         });
         const { username, password } = e.target;
@@ -21,6 +22,7 @@ class Login extends Component {
                 username: username.value, 
                 password: password.value
             };
+            // post login credentials
         fetch(`${config.API_ENDPOINT}/auth/login`, {
                 method: 'POST',
                 headers: {
@@ -36,6 +38,7 @@ class Login extends Component {
         .then(res => {
             username.value = ''
             password.value = ''
+            // saved authToken and go to home page
             TokenService.saveAuthToken(res.authToken);
             this.props.history.push('/');
         })

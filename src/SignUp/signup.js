@@ -15,17 +15,19 @@ class SignUp extends Component {
 
         const { username, password, first_name, repeat_password } = e.target;
         const REGEX = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
-
+        // check password length is greater than 6 characters
         if (password.value.length < 6) {
             this.setState({
                 error: 'Password must be greater than 6 characters.'
             });
         }
+        //check with regex to make sure password contains required characters
         else if (!REGEX.test(password.value)) {
             this.setState({
                 error:'Password must contain one upper case, lower case, number and special character.'
             });
         }
+        //check that repeat password and password match
         else if (password.value !== repeat_password.value) {
             this.setState({
                 error: 'Passwords do no match.'
@@ -36,6 +38,7 @@ class SignUp extends Component {
             first_name: first_name.value,
             user_password: password.value
         };
+        // post user 
         fetch(`${config.API_ENDPOINT}/users`, {
             method: 'POST',
             headers: {
@@ -50,11 +53,13 @@ class SignUp extends Component {
                 : res.json()
                  )
             .then(user => {
+                // show success message
                 this.setState({
                     error:null,
                     success: true
                 });
                 setTimeout(() =>
+                // set timeout to allow for user to see success message
                     this.props.history.push('/login'), 2000
                 );
             })

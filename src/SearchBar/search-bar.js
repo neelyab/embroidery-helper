@@ -5,6 +5,7 @@ class SearchBar extends Component {
     render(){
         let searchTerm;
         if (this.props.searchTerm === null) {
+            //check to make sure stitch is selected
             searchTerm = 'the stitch selected';
         } else {
            const search = this.props.searchTerm.split('-');
