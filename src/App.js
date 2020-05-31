@@ -20,7 +20,9 @@ function App() {
       <PublicRoute path='/login' component={Login}/>
       <PublicRoute path='/sign-up' component={SignUp}/>
       <Route path='/about' component={About}/>
-      <footer></footer>
+      <footer>
+        <p> Contact: <a href="mailto:amanda@crewelghoul.com">amanda@crewelghoul.com</a></p>
+      </footer>
     </main>
   );
 }
