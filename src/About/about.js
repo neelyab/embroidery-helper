@@ -12,7 +12,7 @@ class About extends Component {
         <div className="about-page">
             <section className="about">
                 <img className="img" src={embroidery} alt='embroidery'/>
-                <p>Hand embroidery helper allows you to easily learn embroidery stitches and techniques through clear instructions and fun modern projects that you can apply your new stitching skills to.</p>      
+                <p>Hand embroidery helper is a tool created by Amanda, who runs the embroidery and craft blog <a href="http://crewelghoul.com" target="_blank">Crewel Ghoul</a>. It allows you to easily learn embroidery stitches and techniques through clear instructions and fun modern projects that you can apply your new stitching skills to.</p>      
             </section>
             <section className="about">
                 <img className="img" src={stitch} alt ='stitch diagram'/>
